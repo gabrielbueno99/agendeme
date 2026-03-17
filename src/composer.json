@@ -1,7 +1,7 @@
 {
     "autoload": {
         "files": [
-            
+            "config/routes.php"
         ],
         "psr-4": {
             "App\\": ""
@@ -9,6 +9,7 @@
     },
     "require": {
         "firebase/php-jwt": "^7.0",
-        "php-di/php-di": "^7.1"
+        "php-di/php-di": "^7.1",
+        "vlucas/phpdotenv": "^5.6"
     }
 }

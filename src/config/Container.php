@@ -1,0 +1,29 @@
+<?php
+
+use DI\ContainerBuilder;
+use function DI\autowire;
+use function DI\get;
+use App\Domain\Repositories\User\UserRepositoryInterface;
+use App\Infrastructure\Persistence\User\UserPDORepository;
+
+$builder = new ContainerBuilder();
+$builder->addDefinitions([
+    // Configuração do PDO (Banco de Dados no Docker)
+    \PDO::class => function () {
+        $host = 'db'; // Nome do serviço no docker-compose
+        $db   = getenv('MYSQL_DATABASE');
+        $user = getenv('MYSQL_USER');
+        $pass = getenv('MYSQL_PASSWORD');
+        $charset = 'utf8mb4';
+
+        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+        return new \PDO($dsn, $user, $pass, [
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+        ]);
+    },
+    UserRepositoryInterface::class => autowire(UserPDORepository::class)
+    // \App\Domain\Repositories\Av::class => create(\App\Domain\Repositories\BaseRepositoryInterface::class),
+]);
+
+return $builder->build();
