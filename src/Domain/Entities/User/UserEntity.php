@@ -5,11 +5,11 @@ use Exception;
 class UserEntity {
 
     public function __construct(
-        public readonly ?string $id,
+        public ?string $id,
         private ?string $role,
         public readonly ?string $name,
         public readonly ?string $email,
-        public readonly ?string $passwordHash
+        public ?string $passwordHash
     ){}
 
     public function setRole($role)
@@ -21,7 +21,7 @@ class UserEntity {
         $this->role = $role;
     }
 
-    public function getRole($role)
+    public function getRole()
     {
         return $this->role;
     }

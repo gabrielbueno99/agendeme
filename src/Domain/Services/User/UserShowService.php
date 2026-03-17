@@ -4,12 +4,9 @@ namespace App\Domain\Services\User;
 
 use App\Domain\Repositories\User\UserRepositoryInterface;
 use App\Domain\Entities\User\UserEntity;
+use App\Domain\Services\User\BaseUserService;
 
-class UserShowService {
-
-    public function __construct(
-        private UserRepositoryInterface $repository
-    ){}
+class UserShowService extends BaseUserService {
 
     public function execute($id)
     {

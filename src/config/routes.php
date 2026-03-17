@@ -86,8 +86,9 @@ class Routes {
             });
 
             self::post('/user/create', function () use($container) {
-                
-                
+                $createUserAction = \App\Application\Actions\User\CreateUserAction::class;
+                $result = self::loadContainer($createUserAction, 'create', $container);
+                echo json_encode(['data' => $result]);
             });
 
             self::delete('/user/delete/{id}', function () use($container) {
