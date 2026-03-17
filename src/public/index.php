@@ -2,6 +2,8 @@
 require '../vendor/autoload.php';
 use DI\Container;
 
+header('Content-Type: application/json');
+
 try {
     $container = require_once '../config/Container.php';
     //testa conexão com banco

@@ -13,6 +13,5 @@ abstract class AbstractPDORepository {
         $this->connection = $pdo;
     }
 
-    public function show(){}
-    public function find(){}
+    public function find($fields){}
 }
