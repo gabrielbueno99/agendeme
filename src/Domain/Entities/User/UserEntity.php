@@ -1,28 +1,29 @@
 <?php
 namespace App\Domain\Entities\User;
+
+use App\Domain\Entities\EntityInterface;
+use App\Enums\User\UserRole;
 use Exception;
 
-class UserEntity {
+class UserEntity implements UserEntityInterface {
 
     public function __construct(
+        
         public ?string $id,
-        private ?string $role,
-        public readonly ?string $name,
-        public readonly ?string $email,
+        public string $role,
+        public ?string $name,
+        public ?string $email,
         public ?string $passwordHash
     ){}
 
-    public function setRole($role)
+    public function toArray(EntityInterface $entity)
     {
-        if($role !== 'client' && $role !== 'provider') {
-            return throw new Exception('Error Processing Request: Role '.$role.' is not a valid rule', 1);
-        }
-
-        $this->role = $role;
-    }
-
-    public function getRole()
-    {
-        return $this->role;
+        return [
+            'name' => $entity->name,
+            'email' => $entity->email,
+            'password_hash' => $entity->passwordHash,
+            'role'=> $entity->role,
+            'id' => $entity->id
+        ];
     }
 }

@@ -13,9 +13,13 @@ class UserRegistrationService extends BaseUserService {
         if(!empty($user)) {
             return ['error' => 'User already exists'];
         }
-
+        
         $user = new UserEntity('',$params['role'],$params['name'],$params['email'],$params['passwordHash']);
-
+        
+        if(isset($params['passwordHash'])) {
+            $user->passwordHash = password_hash($user->passwordHash, PASSWORD_DEFAULT);
+        }
+        
         return $this->repository->save($user);
     }
 }

@@ -2,21 +2,21 @@
 
 namespace App\Application\Actions\User;
 
+use App\Application\Actions\BaseAction;
 use Exception;
 use App\Domain\Services\User\UserRegistrationService;
 
-class CreateUserAction {
+class CreateUserAction extends BaseAction {
     public function __construct(
         public readonly UserRegistrationService $user
     ){}
 
     public function create()
     {
-        $json = file_get_contents('php://input');
-        $data = json_decode($json, true);
+        $data = $this->verifyBodyContent();
 
-        if(json_last_error() !== JSON_ERROR_NONE) {
-            return ['error' => 'Invalid JSON'];
+        if(isset($data['error'])) {
+            return $data;
         }
 
         if(empty($data['name']) || empty($data['email']) || empty($data['role']) || empty($data['passwordHash'])) {

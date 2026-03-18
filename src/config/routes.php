@@ -96,9 +96,10 @@ class Routes {
                 
             });
 
-            self::put('/user/update/{id}', function () use($container) {
-                
-                
+            self::put('/user/{id}/update', function ($id) use($container) {
+                $updateUserAction = \App\Application\Actions\User\UpdateUserAction::class;
+                $result = self::loadContainer($updateUserAction, 'update', $container, $id);
+                echo json_encode(['data' => $result]);
             });
         } catch (\Exception $e) {
             http_response_code(404);
