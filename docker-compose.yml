@@ -10,6 +10,8 @@ services:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_USER: gabriel
       MYSQL_PASSWORD: user_password
+      JWT_SECRET_KEY: 1eff814cebd5474d4e39e958e2fb58167203112106c3ce1a760d1e2b9233149f
+      JWT_ISS: agendeme
     container_name: agendeme-php
     volumes:
       - ./src:/var/www 
