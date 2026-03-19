@@ -58,11 +58,19 @@ abstract class AbstractPDORepository {
 
     public function delete($id)
     {
-        $query = "DELETE * FROM {$this->table} WHERE id = {$id}";
+        $query = "DELETE FROM {$this->table} WHERE id = {$id}";
         $stmp = $this->connection->prepare($query);
-        $stmp->execute();
+        $success = $stmp->execute();
 
-        return $stmp;
+        if($success) {
+            return [
+                'deleted'
+            ];
+        }
+
+        return [
+            'error' => 'Something went wrong'
+        ];
     }
 
     public function save(?EntityInterface $entity)
@@ -117,5 +125,8 @@ abstract class AbstractPDORepository {
             return $entity;
         }
 
+        return [
+            'error' => 'Something went wrong'
+        ];
     }
 }

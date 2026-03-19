@@ -40,9 +40,9 @@ class Routes {
             $params = explode('/', trim($currentUri,'/'));
             
             if(isset($params[1])) {
-                $callback($params[1]);
+                return $callback($params[1]);
             } else {
-                $callback();
+                return $callback();
             }
         }
     }
@@ -91,9 +91,10 @@ class Routes {
                 echo json_encode(['data' => $result]);
             });
 
-            self::delete('/user/delete/{id}', function () use($container) {
-                
-                
+            self::delete('/user/{id}/delete', function ($id) use($container) {
+                $deleteUserAction =  \App\Application\Actions\User\DeleteUserAction::class;
+                $result = self::loadContainer($deleteUserAction, 'delete', $container, $id);
+                echo json_encode(['data' => $result]);
             });
 
             self::put('/user/{id}/update', function ($id) use($container) {

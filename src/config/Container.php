@@ -2,7 +2,6 @@
 
 use DI\ContainerBuilder;
 use function DI\autowire;
-use function DI\get;
 use App\Domain\Repositories\User\UserRepositoryInterface;
 use App\Infrastructure\Persistence\User\UserPDORepository;
 
@@ -10,7 +9,7 @@ $builder = new ContainerBuilder();
 $builder->addDefinitions([
     // Configuração do PDO (Banco de Dados no Docker)
     \PDO::class => function () {
-        $host = 'db'; // Nome do serviço no docker-compose
+        $host = 'db';
         $db   = getenv('MYSQL_DATABASE');
         $user = getenv('MYSQL_USER');
         $pass = getenv('MYSQL_PASSWORD');
