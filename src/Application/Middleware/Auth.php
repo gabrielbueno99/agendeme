@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Application\Middleware;
+
+use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\ExpiredException;
@@ -27,6 +29,9 @@ class Auth {
         } catch (ExpiredException $e) {
             http_response_code(401);
             exit("Token inválido ou expirado: {$e}");
+        } catch (Exception $e) {
+            http_response_code(500);
+            exit("Token inválido");
         }
     }
 }

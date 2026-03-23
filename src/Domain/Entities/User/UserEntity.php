@@ -8,7 +8,6 @@ use Exception;
 class UserEntity implements UserEntityInterface {
 
     public function __construct(
-        
         public ?string $id,
         public string $role,
         public ?string $name,

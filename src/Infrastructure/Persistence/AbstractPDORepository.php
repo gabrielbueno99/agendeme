@@ -27,9 +27,9 @@ abstract class AbstractPDORepository {
             return null;
         }
 
-        $user = $this->mapToEntity($res);
+        $entity = $this->mapToEntity($res);
 
-        return $user;
+        return $entity;
     }
 
     public function findBy(array $fields): ?EntityInterface

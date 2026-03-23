@@ -71,8 +71,16 @@ class Routes {
     public static function router(Container $container)
     {
         try {
-            self::get('/auth/refresh-token/{id}', function() use($container) {
+            self::post('/refresh-token/create', function() use($container) {
+                $registrationRefreshToken = \App\Application\Actions\RefreshToken\CreateRefreshTokenAction::class;
+                $result = self::loadContainer($registrationRefreshToken,'create', $container);
+                echo json_encode(['data' => $result]);
+            });
 
+            self::get('/refresh-token', function() use($container) {
+                $showRefreshToken = \App\Application\Actions\RefreshToken\GenerateTokenAction::class;
+                $result = self::loadContainer($showRefreshToken, 'show',$container);
+                echo json_encode(['data' => $result]);
             });
 
             self::post('/auth/login', function() use($container) {

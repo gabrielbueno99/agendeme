@@ -1,8 +1,10 @@
 <?php
 
+use App\Domain\Repositories\RefreshToken\RefreshTokenRepositoryInterface;
 use DI\ContainerBuilder;
 use function DI\autowire;
 use App\Domain\Repositories\User\UserRepositoryInterface;
+use App\Infrastructure\Persistence\RefreshToken\RefreshTokenPDORepository;
 use App\Infrastructure\Persistence\User\UserPDORepository;
 
 $builder = new ContainerBuilder();
@@ -21,7 +23,8 @@ $builder->addDefinitions([
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
         ]);
     },
-    UserRepositoryInterface::class => autowire(UserPDORepository::class)
+    UserRepositoryInterface::class => autowire(UserPDORepository::class),
+    RefreshTokenRepositoryInterface::class => autowire(RefreshTokenPDORepository::class)
     // \App\Domain\Repositories\Av::class => create(\App\Domain\Repositories\BaseRepositoryInterface::class),
 ]);
 

@@ -25,4 +25,9 @@ class JwtGenerate {
             throw new Exception("Error Processing Request", 1);
         }
     }
+
+    public static function generateRefreshToken()
+    {
+        return bin2hex(random_bytes(32));
+    }
 }

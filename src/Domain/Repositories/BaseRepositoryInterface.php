@@ -7,7 +7,7 @@ use App\Domain\Entities\EntityInterface;
 interface BaseRepositoryInterface {
     public function findById($id) : ?EntityInterface;
     public function findBy(array $fields) : ?EntityInterface; 
-    public function save(EntityInterface $user);
+    public function save(EntityInterface $entity);
     public function update(EntityInterface $data);
     public function delete($id);
 }

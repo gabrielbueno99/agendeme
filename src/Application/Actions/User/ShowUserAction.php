@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Application\Actions\User;
+
+use App\Application\Middleware\Auth;
 use App\Domain\Services\User\UserShowService;
 
 class ShowUserAction {
@@ -12,6 +14,7 @@ class ShowUserAction {
 
     public function show($params)
     {   
+        Auth::handle();
         return $this->user->execute($params);
     }
 }
