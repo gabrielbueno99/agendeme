@@ -17,7 +17,7 @@ class UserPDORepository extends AbstractPDORepository implements UserRepositoryI
             $data['role'],
             $data['name'],
             $data['email'],
-            null
+            $data['password_hash']
         );
 
         return $user;

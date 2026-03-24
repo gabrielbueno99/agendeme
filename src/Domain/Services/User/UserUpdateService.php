@@ -27,14 +27,10 @@ class UserUpdateService extends BaseUserService {
         if(!isset($data['role']) && ($data['role'] !== 'cliente' || $data['role'] !== 'prestador')) {
             return [
                 'error' => 'Invalid data',
-                'message' => 'Role not matched whit default roles',
+                'message' => 'Role not matched whit default roles'
             ];
         }
-
-        $user->name = $data['name'] ?? $user->name;
-        $user->email = $data['email'] ?? $user->email;
-        $user->role = $data['role'] ?? $user->role;
  
-        return $this->repository->update($user);
+        return $this->repository->update($data, $id);
     }
 }

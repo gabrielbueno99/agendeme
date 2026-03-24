@@ -84,7 +84,15 @@ class Routes {
             });
 
             self::post('/auth/login', function() use($container) {
+                $loginAuhAction = \App\Application\Actions\Auth\LoginAuthAction::class;
+                $result = self::loadContainer($loginAuhAction,'login',$container);
+                echo json_encode(['data' => $result]);
+            });
 
+            self::post('/auth/logout', function() use($container) {
+                $logoutAuhAction = \App\Application\Actions\Auth\LogoutAuthAction::class;
+                $result = self::loadContainer($logoutAuhAction,'logout',$container);
+                echo json_encode(['data' => $result]);
             });
 
             self::get('/user/{id}', function ($id) use($container) {

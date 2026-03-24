@@ -19,14 +19,6 @@ class RegistrationRefreshTokenService extends BaseRefreshTokenService {
             $expiresAt
         );
 
-        $hasRefresh_token = $this->repository->findBy(['user_id' => $id]);
-
-        if(!empty($hasRefresh_token)) {
-            return [
-                'error' => 'Refresh token has already been created to this user'
-            ];
-        }
-
         $entity = $this->repository->save($refresh_token);
 
         if(empty($entity)) {

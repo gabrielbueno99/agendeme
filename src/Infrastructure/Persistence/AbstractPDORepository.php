@@ -99,9 +99,9 @@ abstract class AbstractPDORepository {
         return $data;
     }
 
-    public function update(?EntityInterface $entity)
+    public function update(array $data, $id): array|bool
     {
-        $data = $entity->toArray($entity);
+        
         if(!isset($data['password_hash'])) {
             unset($data['password_hash']);
         }
@@ -113,16 +113,16 @@ abstract class AbstractPDORepository {
             if($key !== 'id') {
                 $setPart .= "{$key} = :{$key}, ";
                 $params[":{$key}"] = $value;
-            }
+        }   
         }
 
         $setPart = rtrim($setPart, ", ");
-        $query = "UPDATE {$this->table} SET {$setPart} WHERE id = {$entity->id}";
+        $query = "UPDATE {$this->table} SET {$setPart} WHERE id = {$id}";
         $stmp = $this->connection->prepare($query);
         $success = $stmp->execute($params);
         
         if($success) {
-            return $entity;
+            return $success;
         }
 
         return [

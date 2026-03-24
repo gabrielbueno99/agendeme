@@ -12,6 +12,7 @@ class RefreshTokenEntity implements RefreshTokenEntityInterface {
         public ?string $token,
         public ?string $user_id,
         public ?string $expires_at,
+        public ?int $revoked = 0
     ){}
 
     public function toArray(EntityInterface $entity)
