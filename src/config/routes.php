@@ -118,6 +118,30 @@ class Routes {
                 $result = self::loadContainer($updateUserAction, 'update', $container, $id);
                 echo json_encode(['data' => $result]);
             });
+
+            self::post('/service/create', function () use($container) {
+                $createServiceAction = \App\Application\Actions\Service\CreateServiceAction::class;
+                $result = self::loadContainer($createServiceAction, 'create', $container);
+                echo json_encode(['data' => $result]);
+            });
+
+            self::get('/service/{id}', function ($id) use($container) {
+                $showServiceAction = \App\Application\Actions\Service\ShowServiceAction::class;
+                $result = self::loadContainer($showServiceAction, 'show', $container, $id);
+                echo json_encode(['data' => $result]);
+            });
+
+            self::get('/services', function () use($container) {
+                $showAllServicesAction = \App\Application\Actions\Service\ShowAllServicesAction::class;
+                $result = self::loadContainer($showAllServicesAction, 'show', $container);
+                echo json_encode(['data' => $result]);
+            });
+
+            self::get('/user/{id}/services', function ($id) use($container) {
+                $showAllServicesAction = \App\Application\Actions\Service\ShowAllServicesAction::class;
+                $result = self::loadContainer($showAllServicesAction, 'show', $container, $id);
+                echo json_encode(['data' => $result]);
+            });
         } catch (\Exception $e) {
             http_response_code(404);
             throw new Exception("Error Processing Request: ".$e, 1);

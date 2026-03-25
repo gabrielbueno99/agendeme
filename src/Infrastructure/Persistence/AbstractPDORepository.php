@@ -129,4 +129,26 @@ abstract class AbstractPDORepository {
             'error' => 'Something went wrong'
         ];
     }
+
+    public function getAll($id)
+    {
+        // $params = "ON {$this->table}.{$match_fields[0]} = {$second_table}.{$match_fields[1]}";
+        // $query = "SELECT * 
+        //     FROM {$this->table}
+        //     INNER JOIN {$second_table} {$params}";
+        // var_dump($query);
+        // die();
+        // $stmp = $this->connection->prepare($query);
+        // $stmp->execute([
+        //     // $data['user_id'],
+        //     // $data['refresh_token']
+        // ]);
+        // $res = $stmp->fetch(\PDO::FETCH_ASSOC);
+
+        // if(empty($res)) {
+        //     return null;
+        // }
+
+        // return $res;
+    }
 }

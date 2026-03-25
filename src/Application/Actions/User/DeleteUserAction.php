@@ -2,6 +2,7 @@
 
 namespace App\Application\Actions\User;
 
+use App\Application\Middleware\Auth;
 use App\Domain\Services\User\UserDeleteService;
 
 class DeleteUserAction {
@@ -11,6 +12,8 @@ class DeleteUserAction {
 
     public function delete($id)
     {
+        Auth::handle();
+        
         if(!isset($id)) {
             return [
                 'error' => 'ID inst set'

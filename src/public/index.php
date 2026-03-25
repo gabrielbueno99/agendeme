@@ -1,6 +1,5 @@
 <?php
 require '../vendor/autoload.php';
-use DI\Container;
 
 header('Content-Type: application/json');
 
@@ -10,6 +9,7 @@ try {
     $container->get(PDO::class);
 
     App\Config\Routes::router($container);
+    
 
 } catch (\PDOException $e) {
     header('Content-Type: application/json', true, 500);

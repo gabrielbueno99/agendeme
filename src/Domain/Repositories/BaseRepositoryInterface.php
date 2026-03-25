@@ -10,4 +10,5 @@ interface BaseRepositoryInterface {
     public function save(EntityInterface $entity);
     public function update(array $data, $id): array|bool;
     public function delete($id);
+    public function getAll(null|string $id);
 }

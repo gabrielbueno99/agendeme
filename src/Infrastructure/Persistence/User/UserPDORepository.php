@@ -11,7 +11,6 @@ class UserPDORepository extends AbstractPDORepository implements UserRepositoryI
 
     protected function mapToEntity(array $data) :EntityInterface
     {
-
         $user = new UserEntity(
             $data['id'],
             $data['role'],

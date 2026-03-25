@@ -3,6 +3,7 @@
 namespace App\Application\Actions\User;
 
 use App\Application\Actions\BaseAction;
+use App\Application\Middleware\Auth;
 use App\Domain\Services\User\UserUpdateService;
 
 use function PHPSTORM_META\map;
@@ -15,6 +16,8 @@ class UpdateUserAction extends BaseAction{
 
     public function update($id)
     {
+        Auth::handle();
+
         $data = $this->verifyBodyContent();
 
         if(isset($data['error'])) {

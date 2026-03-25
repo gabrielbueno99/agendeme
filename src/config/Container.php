@@ -1,10 +1,12 @@
 <?php
 
 use App\Domain\Repositories\RefreshToken\RefreshTokenRepositoryInterface;
+use App\Domain\Repositories\Service\ServiceRepositoryInterface;
 use DI\ContainerBuilder;
 use function DI\autowire;
 use App\Domain\Repositories\User\UserRepositoryInterface;
 use App\Infrastructure\Persistence\RefreshToken\RefreshTokenPDORepository;
+use App\Infrastructure\Persistence\Service\ServicePDORepository;
 use App\Infrastructure\Persistence\User\UserPDORepository;
 
 $builder = new ContainerBuilder();
@@ -24,8 +26,8 @@ $builder->addDefinitions([
         ]);
     },
     UserRepositoryInterface::class => autowire(UserPDORepository::class),
-    RefreshTokenRepositoryInterface::class => autowire(RefreshTokenPDORepository::class)
-    // \App\Domain\Repositories\Av::class => create(\App\Domain\Repositories\BaseRepositoryInterface::class),
+    RefreshTokenRepositoryInterface::class => autowire(RefreshTokenPDORepository::class),
+    ServiceRepositoryInterface::class => autowire(ServicePDORepository::class),
 ]);
 
 return $builder->build();
