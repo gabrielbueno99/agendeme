@@ -125,6 +125,12 @@ class Routes {
                 echo json_encode(['data' => $result]);
             });
 
+            self::put('/service/{id}', function ($id) use($container) {
+                $updateServiceAction = \App\Application\Actions\Service\UpdateServiceAction::class;
+                $result = self::loadContainer($updateServiceAction, 'update', $container, $id);
+                echo json_encode(['data' => $result]);
+            });
+
             self::get('/service/{id}', function ($id) use($container) {
                 $showServiceAction = \App\Application\Actions\Service\ShowServiceAction::class;
                 $result = self::loadContainer($showServiceAction, 'show', $container, $id);

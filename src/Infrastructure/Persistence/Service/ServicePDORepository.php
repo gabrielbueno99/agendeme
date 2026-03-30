@@ -86,4 +86,36 @@ class ServicePDORepository extends AbstractPDORepository implements ServiceRepos
         return $res;
 
     }
+
+    public function update(array $data, $id): array|bool 
+    {
+        $whitelist = ['name', 'description', 'price', 'duration_minutes'];
+        
+        $fields = [];
+        $params = [
+            ':service_id'  => $id,
+            ':provider_id' => $data['provider_id']
+        ];
+
+        foreach ($data as $key => $value) {
+            if (in_array($key, $whitelist)) {
+                $fields[] = "{$key} = :{$key}";
+                $params[":{$key}"] = $value;
+            }
+        }
+
+        if (empty($fields)) {
+            return false;
+        }
+
+        $sql = "UPDATE services 
+                SET " . implode(', ', $fields) . " 
+                WHERE id = :service_id 
+                AND provider_id = :provider_id";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->rowCount() > 0;
+    }
 }

@@ -10,7 +10,7 @@ class ShowAllServicesService extends BaseServiceService {
 
             $user = $this->verifyUser($id);
 
-            if($user['error']) {
+            if(is_array($user) && !empty($user['error'])) {
                 return $user;
             }
 
