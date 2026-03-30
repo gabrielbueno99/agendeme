@@ -10,4 +10,26 @@ abstract class BaseServiceService {
         public ServiceRepositoryInterface $repository,
         public UserShowService $find_user_service
     ){}
+
+    public function verifyUser($id)
+    {
+        $user = $this->find_user_service->execute($id);
+
+        if(empty($user)) {
+            http_response_code(404);
+            return [
+                'error' => 'User does not exists'
+            ];
+        }
+
+        if($user->role !== 'prestador') {
+            http_response_code(401);
+            
+            return [
+                'error' => 'This user does not have permission to get a service'
+            ];
+        }
+
+        return $user;
+    }
 }

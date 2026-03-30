@@ -7,27 +7,16 @@ class ShowAllServicesService extends BaseServiceService {
     public function execute($id)
     {
         if(!empty($user)) {
-            $user = $this->find_user_service->execute($id);
 
-            if(empty($user)) {
-                return [
-                    'error' => 'User does not exists'
-                ];
-            }
+            $user = $this->verifyUser($id);
 
-            if($user->role !== 'prestador') {
-                http_response_code(401);
-                
-                return [
-                    'error' => 'This user does not have permission to get a service'
-                ];
+            if($user['error']) {
+                return $user;
             }
 
             return $this->repository->getAll($user->id);
         }
         
         return $this->repository->getAll($id);
-
-
     }
 }

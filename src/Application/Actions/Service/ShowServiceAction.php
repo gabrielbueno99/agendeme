@@ -3,22 +3,22 @@
 namespace App\Application\Actions\Service;
 
 use App\Application\Actions\BaseAction;
+use App\Application\Middleware\Auth;
+use App\Domain\Services\Service\ShowServiceService;
 
 class ShowServiceAction extends BaseAction {
-    public function __construct()
-    {
-        throw new \Exception('Not implemented');
-    }
+    public function __construct(
+        public ShowServiceService $service
+    ){}
 
     public function show($id)
     {
-        $data = $this->verifyBodyContent();
+        Auth::handle();
 
-        if(empty($id) || empty($data['provider_id'])) {
-            return [
-                'error' => 'ID is not set'
-            ];
+        if(empty($id)) {
+            return ['error' => 'Some required fields are missing'];
         }
 
+        return $this->service->execute($id);
     }
 }
